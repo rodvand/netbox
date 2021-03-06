@@ -79,9 +79,6 @@ class HomeView(View):
             'provider_count': Provider.objects.restrict(request.user, 'view').count(),
             'circuit_count': Circuit.objects.restrict(request.user, 'view').count(),
 
-            # Secrets
-            'secret_count': Secret.objects.restrict(request.user, 'view').count(),
-
             # Virtualization
             'cluster_count': Cluster.objects.restrict(request.user, 'view').count(),
             'virtualmachine_count': VirtualMachine.objects.restrict(request.user, 'view').count(),
