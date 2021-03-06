@@ -275,12 +275,6 @@ class VirtualMachine(PrimaryModel, ConfigContextModel):
     comments = models.TextField(
         blank=True
     )
-    secrets = GenericRelation(
-        to='secrets.Secret',
-        content_type_field='assigned_object_type',
-        object_id_field='assigned_object_id',
-        related_query_name='virtual_machine'
-    )
     tags = TaggableManager(through=TaggedItem)
 
     objects = ConfigContextModelQuerySet.as_manager()

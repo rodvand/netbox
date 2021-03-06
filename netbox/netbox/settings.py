@@ -285,7 +285,6 @@ INSTALLED_APPS = [
     'dcim',
     'ipam',
     'extras',
-    'secrets',
     'tenancy',
     'users',
     'utilities',
@@ -432,7 +431,7 @@ CACHEOPS = {
     'dcim.*': {'ops': 'all'},
     'ipam.*': {'ops': 'all'},
     'extras.*': {'ops': 'all'},
-    'secrets.*': {'ops': 'all'},
+    'secretstorage.*': {'ops': 'all'},
     'users.*': {'ops': 'all'},
     'tenancy.tenantgroup': None,  # MPTT models are exempt due to raw SQL
     'tenancy.*': {'ops': 'all'},

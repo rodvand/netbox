@@ -595,12 +595,6 @@ class Device(PrimaryModel, ConfigContextModel):
     images = GenericRelation(
         to='extras.ImageAttachment'
     )
-    secrets = GenericRelation(
-        to='secrets.Secret',
-        content_type_field='assigned_object_type',
-        object_id_field='assigned_object_id',
-        related_query_name='device'
-    )
     tags = TaggableManager(through=TaggedItem)
 
     objects = ConfigContextModelQuerySet.as_manager()

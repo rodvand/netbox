@@ -10,7 +10,6 @@ from extras.views import ObjectConfigContextView
 from ipam.models import IPAddress, Service
 from ipam.tables import InterfaceIPAddressTable, InterfaceVLANTable
 from netbox.views import generic
-from secrets.models import Secret
 from utilities.utils import count_related
 from . import filters, forms, tables
 from .models import Cluster, ClusterGroup, ClusterType, VirtualMachine, VMInterface
@@ -257,13 +256,9 @@ class VirtualMachineView(generic.ObjectView):
             Prefetch('ipaddresses', queryset=IPAddress.objects.restrict(request.user))
         )
 
-        # Secrets
-        secrets = Secret.objects.restrict(request.user, 'view').filter(virtual_machine=instance)
-
         return {
             'vminterface_table': vminterface_table,
             'services': services,
-            'secrets': secrets,
         }
 
 

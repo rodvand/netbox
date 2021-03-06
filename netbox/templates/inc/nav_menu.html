@@ -484,30 +484,6 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Secrets <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-header">Secrets</li>
-                        <li{% if not perms.secrets.view_secret %} class="disabled"{% endif %}>
-                            {% if perms.secrets.add_secret %}
-                                <div class="buttons pull-right">
-                                    <a href="{% url 'secrets:secret_add' %}" class="btn btn-xs btn-success" title="Add"><i class="mdi mdi-plus-thick"></i></a>
-                                    <a href="{% url 'secrets:secret_import' %}" class="btn btn-xs btn-info" title="Import"><i class="mdi mdi-database-import-outline"></i></a>
-                                </div>
-                            {% endif %}
-                            <a href="{% url 'secrets:secret_list' %}">Secrets</a>
-                        </li>
-                        <li{% if not perms.secrets.view_secretrole %} class="disabled"{% endif %}>
-                            {% if perms.secrets.add_secretrole %}
-                                <div class="buttons pull-right">
-                                    <a href="{% url 'secrets:secretrole_add' %}" class="btn btn-xs btn-success" title="Add"><i class="mdi mdi-plus-thick"></i></a>
-                                    <a href="{% url 'secrets:secretrole_import' %}" class="btn btn-xs btn-info" title="Import"><i class="mdi mdi-database-import-outline"></i></a>
-                                </div>
-                            {% endif %}
-                            <a href="{% url 'secrets:secretrole_list' %}">Secret Roles</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Logging</li>

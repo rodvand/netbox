@@ -16,7 +16,6 @@ from extras.views import ObjectChangeLogView, ObjectConfigContextView
 from ipam.models import IPAddress, Prefix, Service, VLAN
 from ipam.tables import InterfaceIPAddressTable, InterfaceVLANTable
 from netbox.views import generic
-from secrets.models import Secret
 from utilities.forms import ConfirmationForm
 from utilities.paginator import EnhancedPaginator, get_paginate_count
 from utilities.permissions import get_permission_for_model
@@ -997,9 +996,6 @@ class DeviceView(generic.ObjectView):
         # Services
         services = Service.objects.restrict(request.user, 'view').filter(device=instance)
 
-        # Secrets
-        secrets = Secret.objects.restrict(request.user, 'view').filter(device=instance)
-
         # Find up to ten devices in the same site with the same functional role for quick reference.
         related_devices = Device.objects.restrict(request.user, 'view').filter(
             site=instance.site, device_role=instance.device_role
@@ -1011,7 +1007,6 @@ class DeviceView(generic.ObjectView):
 
         return {
             'services': services,
-            'secrets': secrets,
             'vc_members': vc_members,
             'related_devices': related_devices,
             'active_tab': 'device',
