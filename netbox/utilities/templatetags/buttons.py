@@ -26,6 +26,7 @@ def _get_viewname(instance, action):
 
     return viewname
 
+
 #
 # Table buttons
 #
@@ -44,6 +45,7 @@ def tr_edit_button(instance, extra=None):
         'url': url,
     }
 
+
 @register.inclusion_tag('buttons/tr_delete.html')
 def tr_delete_button(instance, extra=None):
     viewname = _get_viewname(instance, 'delete')
@@ -58,6 +60,7 @@ def tr_delete_button(instance, extra=None):
         'url': url,
     }
 
+
 @register.inclusion_tag('buttons/tr_changelog.html')
 def tr_changelog_button(instance):
     app_label = _resolve_namespace(instance)
@@ -67,7 +70,6 @@ def tr_changelog_button(instance):
     return {
         'url': url,
     }
-
 
 
 #
