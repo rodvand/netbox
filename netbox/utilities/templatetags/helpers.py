@@ -4,6 +4,7 @@ import re
 
 import yaml
 from django import template
+from django.apps import apps
 from django.conf import settings
 from django.urls import NoReverseMatch, reverse
 from django.utils.html import strip_tags
@@ -13,7 +14,19 @@ from markdown import markdown
 from utilities.forms import TableConfigForm
 from utilities.utils import foreground_color
 
+from extras.plugins import PluginConfig
+
 register = template.Library()
+
+
+def _resolve_namespace(instance):
+    """
+    Get the appropriate namespace for the app based on whether it is a Plugin or base application
+    """
+    app = apps.get_app_config(instance._meta.app_label)
+    if isinstance(app, PluginConfig):
+        return f'plugins:{app.label}'
+    return f'{app.label}'
 
 
 #
@@ -80,7 +93,7 @@ def viewname(model, action):
     """
     Return the view name for the given model and action. Does not perform any validation.
     """
-    return f'{model._meta.app_label}:{model._meta.model_name}_{action}'
+    return f'{_resolve_namespace(model)}:{model._meta.model_name}_{action}'
 
 
 @register.filter()
@@ -88,7 +101,7 @@ def validated_viewname(model, action):
     """
     Return the view name for the given model and action if valid, or None if invalid.
     """
-    viewname = f'{model._meta.app_label}:{model._meta.model_name}_{action}'
+    viewname = f'{_resolve_namespace(model)}:{model._meta.model_name}_{action}'
     try:
         # Validate and return the view name. We don't return the actual URL yet because many of the templates
         # are written to pass a name to {% url %}.

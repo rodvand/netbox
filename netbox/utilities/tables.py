@@ -149,20 +149,15 @@ class ButtonsColumn(tables.TemplateColumn):
     attrs = {'td': {'class': 'text-right text-nowrap noprint'}}
     # Note that braces are escaped to allow for string formatting prior to template rendering
     template_code = """
+    {{% load buttons %}}
     {{% if "changelog" in buttons %}}
-        <a href="{{% url '{app_label}:{model_name}_changelog' pk=record.pk %}}" class="btn btn-default btn-xs" title="Change log">
-            <i class="mdi mdi-history"></i>
-        </a>
+        {{% tr_changelog_button record %}}
     {{% endif %}}
     {{% if "edit" in buttons and perms.{app_label}.change_{model_name} %}}
-        <a href="{{% url '{app_label}:{model_name}_edit' pk=record.pk %}}?return_url={{{{ request.path }}}}{{{{ return_url_extra }}}}" class="btn btn-xs btn-warning" title="Edit">
-            <i class="mdi mdi-pencil"></i>
-        </a>
+        {{% tr_edit_button record return_url_extra %}}
     {{% endif %}}
     {{% if "delete" in buttons and perms.{app_label}.delete_{model_name} %}}
-        <a href="{{% url '{app_label}:{model_name}_delete' pk=record.pk %}}?return_url={{{{ request.path }}}}{{{{ return_url_extra }}}}" class="btn btn-xs btn-danger" title="Delete">
-            <i class="mdi mdi-trash-can-outline"></i>
-        </a>
+        {{% tr_delete_button record return_url_extra %}}
     {{% endif %}}
     """
 
